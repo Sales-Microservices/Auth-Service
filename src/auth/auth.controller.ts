@@ -8,12 +8,17 @@ export class AuthController {
   constructor(private readonly authService: AuthService) { }
 
   @MessagePattern('register-user')
-  async registerUser(@Payload() dto: RegisterUser) { }
+  async registerUser(@Payload() dto: RegisterUser) {
+    return this.authService.register(dto);
+  }
 
   @MessagePattern('login-user')
-  async loginUser(@Payload() dto: LoginUser) { }
+  async loginUser(@Payload() dto: LoginUser) {
+    return this.authService.login(dto);
+  }
 
-  @MessagePattern('validate-user')
-  async validateUser() { }
+  verifyToken(@Payload() token: string) {
+    return this.authService.verifyToken(token)
+  }
 
 }
